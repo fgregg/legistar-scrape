@@ -406,7 +406,8 @@ class LegistarScraper (object):
         del data['ctl00$ContentPlaceHolder1$gridCalendar$ctl00$ctl02$ctl01$ctl02']
         del data['ctl00$ContentPlaceHolder1$gridCalendar$ctl00$ctl02$ctl01$ctl04']
         del data['ctl00$ContentPlaceHolder1$chkOptions$1']
-        del data['ctl00$ButtonRSS']
+        if 'ctl00$ButtonRSS' in data:
+          del data['ctl00$ButtonRSS']
 
         data = urllib.urlencode(data)
         response = _try_connect(br, self._calendar_uri, data)
