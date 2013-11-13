@@ -372,14 +372,14 @@ class LegistarScraper (object):
       table = soup.find('table', id='ctl00_ContentPlaceHolder1_gridCalendar_ctl00')
       for event, headers, row in self.parseDataTable(table):
 
-        if type(event['Agenda']) == dict :
+        if 'Agenda' in event and type(event['Agenda']) == dict :
           detail_url = event['Agenda']['url']
           if self.fulltext :
             event['Agenda']['fulltext'] = self._extractPdfText(detail_url)
           else:
             event['Agenda']['fulltext'] = ''
 
-        if type(event['Minutes']) == dict :
+        if 'Minutes' in event and type(event['Minutes']) == dict :
           detail_url = event['Minutes']['url']
           if self.fulltext :
             event['Minutes']['fulltext'] = self._extractPdfText(detail_url)
