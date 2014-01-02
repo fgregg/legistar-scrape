@@ -194,21 +194,22 @@ class LegistarScraper (object):
     Take a row as given from the searchLegislation method and retrieve the
     details of the legislation summarized by that row.
     """
-    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseLegislationDetail, 'url')
+    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseLegislationDetail)
 
   def expandHistorySummary(self, summary):
     """
     Take a row as given from the parseLegislationDetail method and retrieve the
     details of the history event summarized by that row.
     """
-    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseHistoryDetail, 'action details')
+    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseHistoryDetail)
 
-  def expandSummaryRow(self, summary, parse_function, url_key):
+  def expandSummaryRow(self, summary, parse_function):
     """
     Take a row from a data table and use the URL value from that row to
     retrieve more details. Parse those details with parse_function.
     """
-    detail_uri = summary[url_key]
+    print summary
+    detail_uri = summary['url']
 
     br = self._get_new_browser()
     connection_complete = False
