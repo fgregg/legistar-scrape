@@ -144,7 +144,7 @@ class LegistarScraper (object):
     Legistar uses the same kind of data table in a number of places. This will
     return a list of dictionaries using the table headers as keys.
     """
-    headers = table_soup.fetch('th')
+    headers = table_soup.fetch('th', attrs={'class':re.compile('rgHeader')})
     rows = table_soup.fetch('tr', id=re.compile('ctl00_ContentPlaceHolder1_'))
 
     keys = {}
@@ -194,21 +194,21 @@ class LegistarScraper (object):
     Take a row as given from the searchLegislation method and retrieve the
     details of the legislation summarized by that row.
     """
-    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseLegislationDetail)
+    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseLegislationDetail, 'url')
 
   def expandHistorySummary(self, summary):
     """
     Take a row as given from the parseLegislationDetail method and retrieve the
     details of the history event summarized by that row.
     """
-    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseHistoryDetail)
+    return self.expandSummaryRow(self._lowercase_keys(summary), self.parseHistoryDetail, 'action details')
 
-  def expandSummaryRow(self, summary, parse_function):
+  def expandSummaryRow(self, summary, parse_function, url_key):
     """
     Take a row from a data table and use the URL value from that row to
     retrieve more details. Parse those details with parse_function.
     """
-    detail_uri = summary['url']
+    detail_uri = summary[url_key]
 
     br = self._get_new_browser()
     connection_complete = False
