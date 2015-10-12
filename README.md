@@ -1,3 +1,5 @@
+THIS REPOSITORY HAS BEEN DEPRECATED AND IS NO LONGER BEING MAINTAINED. IT HAS BEEN SUPERSEDED BY https://github.com/opencivicdata/python-legistar-scraper AND https://github.com/opencivicdata/scrapers-us-municipal
+
 Legistar Scraper is a python library for scraping [Legistar sites](http://www.granicus.com/Legistar/Product-Overview.aspx) 
 -- legislation management sites hosted by by [Granicus](http://www.granicus.com/Streaming-Media-Government.aspx).
 
